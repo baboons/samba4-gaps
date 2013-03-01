@@ -32,7 +32,6 @@ client = gdata.apps.multidomain.client.MultiDomainProvisioningClient(domain=gaDo
 client.ssl = True
 client.ClientLogin(email=gaEmail, password=gaPassword, source='apps')
 
-
 def esc(s):
     return quopri.encodestring(s, quotetabs=True)
 
