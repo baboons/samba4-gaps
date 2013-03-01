@@ -63,7 +63,7 @@ def update_password(mail, pwd):
 def run():
     creds = Credentials()
     samdb = SamDB(url=(sambaPrivate + "/sam.ldb.d/" + sambaPath + ".ldb"), session_info=system_session(), credentials=creds.guess())
-    res = samdb.search(base="adBase", expression="(objectClass=user)", attrs=["supplementalCredentials", "sAMAccountName", "mail"])
+    res = samdb.search(base=adBase, expression="(objectClass=user)", attrs=["supplementalCredentials", "sAMAccountName", "mail"])
 
     for r in res:
          if not "supplementalCredentials" in r:
