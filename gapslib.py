@@ -6,6 +6,7 @@ import textwrap
 import hashlib
 import syslog
 import gdata.apps.multidomain.client;
+import re
 
 from samba.credentials import Credentials
 from samba.auth import system_session
@@ -20,6 +21,8 @@ gaPassword = "yourpassword"
 sambaPrivate = "/usr/local/samba/private"
 sambaPath = "DC=YOURDOMAIN,DC=COM"
 adBase = "ou=Domain Users,dc=yourdomain,dc=com"
+### Set this option to True if using domain aliases ###
+replaceDomain = False
 
 ## Open connection to Syslog ##
 syslog.openlog(logoption=syslog.LOG_PID, facility=syslog.LOG_LOCAL3)
@@ -40,6 +43,9 @@ def print_entry(dn, user, mail, pwd):
 
 def update_password(mail, pwd):
     password = hashlib.sha1(pwd).hexdigest()
+
+    if replaceDomain:
+      mail = re.search("([\w.-]+)@", mail).group() + gaDomain
 
     if passwords.has_key(mail):
         if passwords[mail] == password:
