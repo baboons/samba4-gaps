@@ -42,6 +42,7 @@ def print_entry(dn, user, mail, pwd):
     print '%s\t%s\t%s\t%s' % tuple([esc(p) for p in [dn, user, mail, pwd]])
 
 def update_password(mail, pwd):
+    pwd = pwd.encode('ascii', 'ignore')
     password = hashlib.sha1(pwd).hexdigest()
 
     if replaceDomain:
