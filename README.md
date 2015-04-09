@@ -26,7 +26,7 @@ pip install --upgrade google-api-python-client
 Install notes
 ===========
 
-1. Install python-pip
+1. Install python-pip and python-openssl
 2. Create a project in Google API Console and add Admin SDK permission (read/write)
 3. Create a JSON Config for your project in Google Developer Console
 4. Install the JSON config to your samba machine in /etc/gaps/service.json (create the folder if missing)
