@@ -1,13 +1,8 @@
 Google Apps Password Sync for Samba4
 ===========
 
-
-Reads from your Samba4 AD and updates passwords in Google Apps in SHA1 format.
-Note that this solution requires you to enable plaintext passwords:
-
-samba-tool domain passwordsettings set --store-plaintext=on
-
-Also you will have to use "Store passwords using reversible encryption" for each users. This can be enabled with MS Active Directory snap in tool from Windows.
+Reads from your Samba4 AD and updates passwords in Google Apps 
+Note that this solution requires you to enable "password hash userPassword schemes = CryptSHA256 CryptSHA512" in smb.conf
 
 Python Dependencies
 ===========
