@@ -10,6 +10,7 @@ import httplib2
 import ldb
 import os
 
+from Crypto import Random
 from apiclient import errors
 from apiclient.discovery import build
 
@@ -109,8 +110,10 @@ def run():
 
         if str(pwdlastset) != dict_mail_pwdlastset.get(mail,''):
 
+            Random.atfork()
+
             # Update if password different in dict mail pwdlastset
-            password = testpawd.get_account_attributes(samdb_loc,None,param_samba['basedn'],filter="(sAMAccountName=%s)" % (str(user["sAMAccountName"])),scope=ldb.SCOPE_SUBTREE,attrs=[passwordattr],decrypt=True)
+            password = testpawd.get_account_attributes(samdb_loc,None,param_samba['basedn'],filter="(sAMAccountName=%s)" % (str(user["sAMAccountName"])),scope=ldb.SCOPE_SUBTREE,attrs=[passwordattr],decrypt=False)
             if not passwordattr in password:
                 continue
             password = str(password[passwordattr])
